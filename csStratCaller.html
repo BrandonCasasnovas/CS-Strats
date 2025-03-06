@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS2 Strat Helper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function showSection(current, next) {
+            document.getElementById(current).classList.add('hidden');
+            document.getElementById(next).classList.remove('hidden');
+        }
+        function goBack(current, previous) {
+            document.getElementById(current).classList.add('hidden');
+            document.getElementById(previous).classList.remove('hidden');
+        }
+        function loadVideo(role) {
+            showSection('role-select', 'video-display');
+            let videoId = "";
+            let roleDesc = "";
+            if (role === "Entry Fragger") {
+                videoId = "pPZZ7qhc9GI"; // Replace with actual video ID
+                roleDesc = "Quietley wait at the top of upper B apps until your support player throws the two smokes onto the bombsite. Throw a pop flash off the wall that pops just under the window so that it does not blind you or your teamates and lead the team out the window. You want to clear get right first and then begin clearing the rest of the site.";
+            } else if (role === "Second/Third Entry") {
+                videoId = "DA6YzI9o62Y"; // Replace with actual video ID
+                roleDesc = "Role Description: This is the unique description for Second Entry.";
+            } else if (role === "Support") {
+                videoId = "_LuWu-WrRdc"; // Replace with actual video ID for Support
+                roleDesc = "Role Description: This is the unique description for the Support role.";
+            } else if (role === "Mid Player") {
+                videoId = "I0f14QYNpqc"; // Replace with actual video ID for Mid Player
+                roleDesc = "Role Description: This is the unique description for the Mid Player role.";
+            } else {
+                videoId = "YOUR_DEFAULT_VIDEO_ID"; // Fallback video ID
+                roleDesc = "Role Description: Default role description.";
+            }
+            document.getElementById('video-frame').src = "https://www.youtube.com/embed/" + videoId;
+            document.getElementById('role-description').innerText = roleDesc;
+        }
+        function goHome() {
+            document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
+            document.getElementById('map-select').classList.remove('hidden');
+        }
+    </script>
+</head>
+
+<body class="bg-gray-900 text-white text-center p-5">
+    <div id="map-select" class="section">
+        <h2 class="text-2xl font-bold mb-4">Select a Map</h2>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
+            onclick="showSection('map-select', 'strat-select')">Mirage</button>
+    </div>
+
+    <div id="strat-select" class="section hidden">
+        <h2 class="text-2xl font-bold mb-4">Select a Strat</h2>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
+            onclick="showSection('strat-select', 'role-select')">B Pop</button>
+        <div class="mt-5">
+            <button class="bg-orange-500 hover:bg-orange-700 text-black font-bold py-3 px-6 rounded-lg"
+                onclick="goBack('strat-select', 'map-select')">Back</button>
+            <button class="bg-orange-500 hover:bg-orange-700 text-black font-bold py-3 px-6 rounded-lg"
+                onclick="goHome()">Home</button>
+        </div>
+    </div>
+
+    <div id="role-select" class="section hidden">
+        <h2 class="text-2xl font-bold mb-4">Select Your Role</h2>
+        <div class="role-container">
+            <button class="role bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
+                onclick="loadVideo('Entry Fragger')">Entry Fragger</button>
+            <button class="role bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
+                onclick="loadVideo('Second/Third Entry')">Second/Third Entry</button>
+            <button class="role bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
+                onclick="loadVideo('Support')">Support</button>
+            <button class="role bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
+                onclick="loadVideo('Mid Player')">Mid Player</button>
+        </div>
+        <div class="mt-5">
+            <button class="bg-orange-500 hover:bg-orange-700 text-black font-bold py-3 px-6 rounded-lg"
+                onclick="goBack('role-select', 'strat-select')">Back</button>
+            <button class="bg-orange-500 hover:bg-orange-700 text-black font-bold py-3 px-6 rounded-lg"
+                onclick="goHome()">Home</button>
+        </div>
+    </div>
+
+    <div id="video-display" class="section hidden">
+        <h2 class="text-2xl font-bold mb-4">Strat Video</h2>
+        <iframe id="video-frame" class="w-full max-w-xl mx-auto" height="315" frameborder="0" allowfullscreen></iframe>
+        <div class="descrip-container mt-5">
+            <h2 class="font-bold">Role Description</h2>
+            <p id="role-description" class="text-lg mt-4">
+                Role Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sed orci euismod,
+                dignissim tortor vel, tempus turpis.
+            </p>
+            <button class="nav bg-orange-500 hover:bg-orange-700 text-black font-bold py-3 px-6 rounded-lg mt-4"
+                onclick="goBack('video-display', 'role-select')">Back</button>
+            <button class="nav bg-orange-500 hover:bg-orange-700 text-black font-bold py-3 px-6 rounded-lg mt-4"
+                onclick="goHome()">Home</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    .role {
+        max-width: 15em;
+        margin: 0.5em;
+        min-width: 12em;
+    }
+
+    .role-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .descrip-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #role-description {
+        max-width: 50em;
+    }
+
+    .nav {
+        min-width: 7em;
+    }
+</style>
+
+
+
+<!-- b pop flom summary
+https://www.youtube.com/watch?v=y8MhQ_83TBQ 2:28:09 
+-->
